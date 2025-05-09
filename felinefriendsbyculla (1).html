@@ -1,0 +1,2359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feline Friends Byculla - Help Street Cats</title>
+    <meta name="description" content="Support Feline Friends Byculla in feeding and caring for street cats in Mumbai. Donate, see rescue stories, and meet our feline family.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #ff7e5f;
+            --accent: #ffd166;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+            --success: #06d6a0;
+            --text: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--dark);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 0.5rem 2rem;
+            background-color: rgba(43,45,66,0.95);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 60px;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled .logo {
+            height: 50px;
+        }
+        
+        .org-name {
+            color: white;
+            font-family: 'Playfair Display', serif;
+            margin-left: 15px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        nav {
+            display: flex;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Section Styles */
+        .section {
+            min-height: 100vh;
+            padding: 100px 5% 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.8);
+            z-index: -1;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        /* About Section */
+        #about {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.6s ease-out;
+        }
+        
+        .about-content.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Video Upload Section */
+        .video-upload {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .video-sticker {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            opacity: 0.9;
+        }
+        
+        .video-sticker img {
+            width: 100%;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .video-upload h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .video-upload p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: none;
+        }
+        
+        .upload-btn:hover {
+            background-color: #3a5a8c;
+            transform: translateY(-2px);
+        }
+        
+        #videoPreview {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        /* Donation Section */
+        #donate {
+            background-color: #f0f4f8;
+        }
+        
+        .donation-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .donation-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .donation-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .donation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+        
+        .donation-card.selected {
+            border-color: var(--success);
+            background-color: rgba(6,214,160,0.05);
+        }
+        
+        .donation-card h3 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .donation-card .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .donation-card .impact {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .donation-card .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-right: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .donation-card:hover .product-image {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .donation-content {
+            flex: 1;
+        }
+        
+        .custom-amount {
+            margin-top: 20px;
+        }
+        
+        .custom-amount input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-amount input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74,111,165,0.2);
+        }
+        
+        .donation-summary {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            align-self: start;
+            position: sticky;
+            top: 120px;
+        }
+        
+        .donation-summary h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .summary-items {
+            margin-bottom: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .total-amount {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a5a8c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(74,111,165,0.1);
+        }
+        
+        .qr-code-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .qr-code {
+            max-width: 200px;
+            border: 10px solid white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .qr-instruction {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Leaderboard Styles */
+        .leaderboard {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .leaderboard h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .leaderboard-items {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .donor-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .donor-item .name {
+            font-weight: 500;
+        }
+        
+        .donor-item .amount {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Gallery Section */
+        #gallery {
+            background-color: #f9f5f0;
+        }
+        
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .cat-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            aspect-ratio: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .cat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .cat-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .cat-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .cat-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+        }
+        
+        .cat-card:hover .cat-info {
+            transform: translateY(0);
+        }
+        
+        .cat-name {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .cat-bio {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Rescue Stories Section */
+        .rescue-story {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .rescue-story h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        
+        .photo-collage {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .photo-collage img {
+            width: 30%;
+            min-width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .story-box {
+            position: relative;
+            width: 100%;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eaeaea;
+        }
+        
+        .story-content {
+            max-height: 200px;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            position: relative;
+        }
+        
+        .story-content p {
+            padding: 0 10px 20px;
+            line-height: 1.7;
+            width: 100%;
+        }
+        
+        .story-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(250,250,250,0), rgba(250,250,250,1));
+        }
+        
+        .read-more-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 15px auto 0;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .current-status-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .current-status-images img {
+            width: 45%;
+            min-width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .rescue-stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 30px 0 10px;
+            gap: 15px;
+        }
+        
+        .stat-item {
+            width: calc(50% - 10px);
+        }
+        
+        .stat-box {
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            height: 100%;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .stat-title {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* Contact Section */
+        #contact {
+            background-color: #f0f4f8;
+            padding-bottom: 50px;
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 0 10px;
+        }
+        
+        .contact-info {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-text {
+            font-size: 1.1rem;
+        }
+        
+        .contact-text a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-text a:hover {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            animation: modalFadeIn 0.4s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--secondary);
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .modal-message {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .impact-statement {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid var(--success);
+        }
+        
+        .impact-statement h4 {
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+        
+        /* Happy Cat Animation */
+        .happy-cats {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .happy-cat {
+            width: 150px;
+            height: 150px;
+            background-image: url('https://i.ibb.co/Kx94qn44/1744180532959.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Video Container Styles */
+        .video-container {
+            margin: 20px auto;
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .donation-container, .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .donation-summary {
+                position: static;
+            }
+            
+            .video-sticker {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 80px;
+                margin: 10px auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            
+            .org-name {
+                font-size: 1.2rem;
+                margin-left: 10px;
+            }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                transform: translateY(-150%);
+                transition: all 0.3s ease;
+                z-index: 999;
+            }
+            
+            nav.active {
+                transform: translateY(0);
+            }
+            
+            nav a {
+                margin: 10px 0;
+                padding: 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .section {
+                padding: 80px 5% 50px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .contact-container {
+                padding: 0 15px;
+                gap: 20px;
+            }
+            
+            .contact-info {
+                padding: 20px;
+            }
+            
+            .donation-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .product-image {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .cat-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .photo-collage img,
+            .current-status-images img {
+                width: 100%;
+                min-width: 100%;
+            }
+            
+            .rescue-story {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="logo-container">
+            <img src="https://i.ibb.co/JwtvpWsk/1743949651198.png" alt="Feline Friends Byculla Logo" class="logo">
+            <span class="org-name">Feline Friends Byculla</span>
+        </div>
+        <button class="mobile-menu-btn" id="menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav id="main-nav">
+            <a href="#about">About</a>
+            <a href="#donate">Donate</a>
+            <a href="#gallery">Our Cats</a>
+            <a href="#rescues">Rescues</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title animate">About Us</h2>
+        <div class="about-content animate delay-1">
+            <h1>About Us – Feline Friends Byculla</h1>
+            <p>Welcome to Feline Friends Byculla – a heartfelt initiative born out of love, compassion, and a deep sense of responsibility towards the voiceless.</p>
+            
+            <p>We are a small team of one – a working student juggling college, work, and life – with a big heart for street cats. Every two days, I feed 15 beautiful street cats in and around Byculla, Mumbai. These cats aren't just animals to me — they are family. Each one has a name, a personality, and a story.</p>
+            
+            <p>Some are playful kittens born under parked cars. Some are older cats who've survived harsh monsoons and scorching summers. One is a rescued Persian cat I found near my building, abandoned and struggling to breathe. Despite her respiratory issues, she still purrs softly and waits for food with hope in her eyes. Others have been treated and nursed back to health after injuries or infections — and their recovery has only been possible through love, patience, and whatever little I could manage.</p>
+            
+            <p>But the truth is, feeding 15 cats regularly on a student budget is tough. I buy whatever I can afford — Purepet gravy, Whiskas pouches, and 1kg dry food packs — and prepare meals despite having very little time. Some days I skip meals, but I can't bear to see their empty bowls.</p>
+            
+            <p>Sadly, not everyone understands this bond. I face constant opposition from my housing society and neighbours who see these cats as a nuisance. But I carry on. Because these cats have no one else.</p>
+            
+            <p>This website is my way of reaching out. If you've ever loved an animal, you'll understand. If you believe kindness matters, I hope you'll help.</p>
+            
+            <p>Your donation – big or small – helps feed a hungry cat. It helps me buy medicine when they're sick. It gives these innocent lives a chance to feel safe, even if just for a day.</p>
+            
+            <p>We've also added a gallery to show you the cats who've been treated and saved – their photos speak louder than words.</p>
+            
+            <p>Thank you for being here. Thank you for caring. Because of people like you, these cats still have hope.</p>
+        </div>
+
+        <!-- Video Upload Section -->
+        <div class="video-upload animate delay-2">
+            <h3>See Their Hunger</h3>
+            <p>Watch how the cats react when they miss just one meal. This video shows their desperate hunger when food is delayed.</p>
+            
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/MgCGKbHQ2c8?autoplay=0&controls=1&modestbranding=1&rel=0&fs=1" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <div class="video-sticker">
+                <img src="https://i.ibb.co/4wGgTy8f/1744180313871.png" alt="Hungry Cat Sticker">
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section id="donate" class="section">
+        <h2 class="section-title animate">Support Our Cats</h2>
+
+        <div class="donation-instructions" style="
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 0 auto 20px;
+            max-width: 800px;
+            border-left: 4px solid #ffd166;
+            font-size: 0.95rem;
+        ">
+            <p style="margin:0;font-weight:600;color:#333;">
+                <i class="fas fa-info-circle"></i> How to donate:
+            </p>
+            <p style="margin:8px 0 0;">
+                • <strong>Tap once</strong> to add 1 item<br>
+                • <strong>Double-tap</strong> to add 2 items quickly<br>
+                • <strong>Selected-Items</strong> apper in your contributions<br>
+                • <strong>Custom Donation</strong> Available
+            </p>
+        </div>
+        
+        <!-- Leaderboard -->
+        <div class="leaderboard animate">
+            <h3>Top Donors 🏆</h3>
+            <div class="leaderboard-items" id="leaderboard">
+                <!-- Filled by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="donation-container">
+            <div class="donation-options">
+                <div class="donation-card animate" onclick="addToCart(30, 'Purepet Gravy', event)" ondblclick="addMultipleToCart(30, 'Purepet Gravy', 2, event)">
+                    <img src="https://i.ibb.co/Psh6Bj64/1744178064997.png" alt="Purepet Gravy" class="product-image">
+                    <div class="donation-content">
+                        <span class="badge">Most Needed</span>
+                        <h3>Purepet Gravy</h3>
+                        <div class="price">₹30</div>
+                        <div class="impact">1 meal for 1 cat</div>
+                    </div>
+                </div>
+                
+                <div class="donation-card animate delay-1" onclick="addToCart(50, 'Whiskas Gravy', event)" ondblclick="addMultipleToCart(50, 'Whiskas Gravy', 2, event)">
+                    <img src="https://i.ibb.co/DfpX7SrV/1744177977086.png" alt="Whiskas Gravy" class="product-image">
+                    <div class="donation-content">
+                        <h3>Whiskas Gravy</h3>
+                        <div class="price">₹50</div>
+                        <div class="impact">1 special meal for 1 cat</div>
+                    </div>
+                </div>
+                
+                <div class="donation-card animate delay-2" onclick="addToCart(199, '1kg Purepet Dry', event)" ondblclick="addMultipleToCart(199, '1kg Purepet Dry', 2, event)">
+                    <img src="https://i.ibb.co/Psh6Bj64/1744178064997.png" alt="1kg Purepet Dry" class="product-image">
+                    <div class="donation-content">
+                        <h3>1kg Purepet Dry</h3>
+                        <div class="price">₹199</div>
+                        <div class="impact">Feeds 15 cats for 5 days</div>
+                    </div>
+                </div>
+                
+                <div class="donation-card animate delay-3" onclick="addToCart(300, '1.2kg Drools', event)" ondblclick="addMultipleToCart(300, '1.2kg Drools', 2, event)">
+                    <img src="https://i.ibb.co/2YybnjNj/1744178111681.png" alt="1.2kg Drools" class="product-image">
+                    <div class="donation-content">
+                        <span class="badge">Premium</span>
+                        <h3>1.2kg Drools</h3>
+                        <div class="price">₹300</div>
+                        <div class="impact">Feeds 15 cats for 5 days</div>
+                    </div>
+                </div>
+                
+                <div class="custom-amount animate delay-3">
+                    <input type="number" id="customAmount" placeholder="Enter custom amount (₹)" min="10">
+                </div>
+            </div>
+            
+            <div class="donation-summary animate">
+                <h3>Your Contribution</h3>
+                <div class="summary-items" id="summaryItems">
+                    <p>No items selected yet</p>
+                </div>
+                <div class="total-amount" id="totalAmount">₹0</div>
+                <div class="action-buttons">
+                    <button class="btn btn-outline" onclick="resetCart()">Cancel</button>
+                    <button class="btn btn-primary" onclick="processDonation()">Donate Now</button>
+                </div>
+                <div class="qr-code-container">
+                    <p class="qr-instruction">Scan to pay via UPI</p>
+                    <img src="https://i.ibb.co/vCwbwgF1/IMG-20250508-011716.jpg" alt="FamPay QR Code" class="qr-code">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section">
+        <h2 class="section-title animate">Meet Our Feline Family</h2>
+        <div class="gallery-container">
+            <div class="cat-grid">
+                <!-- Cat 1 -->
+                <div class="cat-card animate">
+                    <img src="https://i.ibb.co/bgZwt5DS/IMG-20250412-WA0024.jpg" alt="Crab the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Crab</h3>
+                        <p class="cat-bio">Age- 7months+ Likes Chicken Gravy</p>
+                    </div>
+                </div>
+                
+                <!-- Cat 2 -->
+                <div class="cat-card animate delay-1">
+                    <img src="https://i.ibb.co/wN2Khr2Z/IMG-20250408-WA0011.jpg" alt="KOI the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">KOI</h3>
+                        <p class="cat-bio">Age- 7months+ Likes dry food. likes to stay with crab</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-1">
+                    <img src="https://i.ibb.co/fVdWqTVz/IMG-20250408-WA0012.jpg" alt="Goldy the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Goldy</h3>
+                        <p class="cat-bio">Age- 3Years+ Mother of crab,koi and goldy 2.0</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-2">
+                    <img src="https://i.ibb.co/8nRmx73B/IMG-20250412-WA0018.jpg" alt="Goldy 2.0 the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Goldy 2.0</h3>
+                        <p class="cat-bio">Age: 1year+ Likes to fight everyone</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-2">
+                    <img src="https://i.ibb.co/2fXnY4k/IMG-20250412-WA0013.jpg" alt="Shadow the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Shadow</h3>
+                        <p class="cat-bio">Was rescued in 2018(panleukopenia). After treatment he returened to streets</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/KjFdTT65/IMG-20250412-WA0017.jpg" alt="Blacky1 the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Blacky1</h3>
+                        <p class="cat-bio">The most playful of all</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/JFBPK7nJ/IMG-20250408-WA0009.jpg" alt="Blacky2 the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Blacky2</h3>
+                        <p class="cat-bio">Best Duo</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/Q7mzXmNh/IMG-20250509-002453.jpg" alt="Ginger the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Ginger</h3>
+                        <p class="cat-bio">2years+ Visits our house to eat</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/5hLXSB0s/IMG-20250508-164803.jpg" alt="Ginger2.0 the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Ginger2.0</h3>
+                        <p class="cat-bio">Brother of ginger. Loves to create chaos</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/G48cJ0Kx/IMG-20250508-171443.jpg" alt="Ginger3.0 the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Ginger3.0</h3>
+                        <p class="cat-bio">A constantly hungry cat with a sunken belly, eating fast and greedily — a clear sign of past starvation.</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/k6WJtS4j/IMG-20250416-WA0002.jpg" alt="Eggy the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Eggy</h3>
+                        <p class="cat-bio">5months old , lazy and hungry</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/TD0ddGg4/IMG-20250407-WA0003-1.jpg" alt="Snowball the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Snowball</h3>
+                        <p class="cat-bio">A street queen for 12 years, she's survived wounds, dog attacks, harsh weather, and raised over 30 kittens — a true warrior of the streets.</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/Q3XYxhrw/IMG-20250408-WA0014.jpg" alt="Micko the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Micko</h3>
+                        <p class="cat-bio">Most caring mother</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/KxwjTw2P/IMG-20250508-182851.jpg" alt="Snow the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Snow</h3>
+                        <p class="cat-bio">Gives birth to most beautiful kittens</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/gFfnxFZy/IMG-20250508-164813.jpg" alt="Bruno the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Bruno</h3>
+                        <p class="cat-bio">Loving and playfull</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/ympV8YVP/IMG-20250508-164749.jpg" alt="Toffe the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Toffe</h3>
+                        <p class="cat-bio">Son of micko, looking for adoption</p>
+                    </div>
+                </div>
+
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/NBHBCP9/IMG-20250508-164740.jpg" alt="ET the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">ET</h3>
+                        <p class="cat-bio">Semi-persian stray , always angry and wild</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/C3QRpKsT/IMG-20250508-164852.jpg" alt="Murphy the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Murphy</h3>
+                        <p class="cat-bio">Daughter of ET , semi persian, deserves a home</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/xWnSWzq/IMG-20250508-WA0030.jpg" alt="Luna the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">Luna</h3>
+                        <p class="cat-bio">Semi-persian stray, loved and cared by a shopkeeper</p>
+                    </div>
+                </div>
+                
+                <div class="cat-card animate delay-3">
+                    <img src="https://i.ibb.co/216SHhVP/IMG-20250508-184146.jpg" alt="snowball 2.0 the cat">
+                    <div class="cat-info">
+                        <h3 class="cat-name">snowball 2.0</h3>
+                        <p class="cat-bio">Most active and playfull kitty, adopted</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Rescue Stories Section -->
+    <section id="rescues" class="section" style="background-color: #f5f0e9; padding: 60px 5%;">
+        <h2 class="section-title animate" style="position: relative; display: inline-block; margin-bottom: 40px;">
+            Rescue Stories
+            <span style="position: absolute; bottom: -10px; left: 0; width: 70px; height: 4px; background: var(--secondary); border-radius: 2px;"></span>
+        </h2>
+        
+        <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+            <!-- Story 1 -->
+            <div class="rescue-story animate">
+                <h3>Mickey's Rescue Story</h3>
+                
+                <!-- Before/During Rescue Images -->
+                <div class="photo-collage">
+                    <img src="https://i.ibb.co/HpFsf15B/In-Collage-20250424-042605230.jpg" alt="Mickey rescue photo">
+                    <img src="https://i.ibb.co/JRG7hxP9/In-Collage-20250424-082959600.jpg" alt="Mickey recovery photo">
+                </div>
+                
+                <!-- Story Content -->
+                <div class="story-box">
+                    <div id="story1" class="story-content">
+                        <p>It was monsoon season, and the rain was pouring heavily outside. We were just sitting down for dinner when we heard a faint sound—barely audible over the rain. It was a kitten crying, but the sound was so soft that we weren't even sure at first. We looked out the window, but the heavy rain and darkness made it hard to see anything clearly. Still, something told us to go downstairs and check.</p>
+                        <p>We followed the sound for a while, and after about 10 minutes—once the rain had slowed down—we found two tiny kittens. They looked exactly alike, same age, same pattern, completely soaked in muddy water. Their eyes were covered in dirt, and they were half-submerged in a water-filled pothole. It was heartbreaking.</p>
+                        <p>My mom immediately picked them up and brought them home. We cleaned them gently and gave them some warm diluted milk (since regular milk isn't good for kittens, but we didn't have anything else at that moment). One was a female—she was the one crying for help. The other, a male, was silent and barely breathing.</p>
+                        <p>Since it was late at night, we couldn't take them to a vet. We kept them warm and fed the female kitten a little milk. But the male kitten wasn't responding much. Later that night, we noticed he had a severe worm infestation around his legs. We separated them to keep her safe, but sadly, by morning, the male kitten had passed away.</p>
+                        <p>We focused all our care on the female kitten. We gave her proper kitten food, wet gravy, and boiled chicken. We named her Mickey. She was so lively and playful, and we instantly fell in love with her. We knew we couldn't let her go.</p>
+                        <p>Now, Mickey is 3 years old—happy, healthy, fully vaccinated, dewormed, and neutered. She lives with us and brings so much joy into our lives every day. From that rainy night to now, she's truly living her best life.</p>
+                    </div>
+                    <button onclick="toggleStory('story1')" class="read-more-btn">
+                        Read More <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <!-- Current Status Section -->
+                <h4 class="current-status-title">Current Status</h4>
+                <div class="current-status-images">
+                    <img src="https://i.ibb.co/S8v8JT0/In-Collage-20250425-015701825.jpg" alt="Mickey current photo 1">
+                    <img src="https://i.ibb.co/G4K4QgG1/In-Collage-20250424-084229645.jpg" alt="Mickey current photo 2">
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="rescue-stats">
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RESCUE DATE</div>
+                            <div>August 2023</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RECOVERY PHASE</div>
+                            <div>1 week</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">MEDICAL COSTS</div>
+                            <div>₹3k</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">CURRENT STATUS</div>
+                            <div>Vaccinated neutered Healthy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story 2 -->
+            <div class="rescue-story animate">
+                <h3>Drum Rescue</h3>
+                
+                <!-- Before/During Rescue Images -->
+                <div class="photo-collage">
+                    <img src="https://i.ibb.co/7qqTZr1/In-Collage-20250427-154508175.jpg" alt="Drum rescue photo">
+                </div>
+                
+                <!-- Story Content -->
+                <div class="story-box">
+                    <div id="story2" class="story-content">
+                        <p>Since most people in my building know I care for cats, one day a friend came running to tell me about a kitten stuck inside a big drum. We had no idea how he ended up in there, but there was a bit of water at the bottom and he looked completely helpless.</p>
+                        <p>We rushed to get him out. When we pulled him up, we saw scars and scratch marks all over his body and head—probably from trying to climb out and falling back in over and over again.</p>
+                        <p>And here's the crazy part—we had always wished for a black kitten, and there he was, right in front of us.</p>
+                        <p>We decided to keep him without a second thought. Today, he's 7 years old—vaccinated, dewormed, neutered, and living a good life. He's healthy, playful, and sometimes a bit aggressive with the local street cats—but he's family now.</p>
+                    </div>
+                    <button onclick="toggleStory('story2')" class="read-more-btn">
+                        Read More <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <!-- Current Status Section -->
+                <h4 class="current-status-title">Current Status</h4>
+                <div class="current-status-images">
+                    <img src="https://i.ibb.co/60JvG1Kf/In-Collage-20250425-022316808.jpg" alt="Drum rescue current photo">
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="rescue-stats">
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RESCUE DATE</div>
+                            <div>September 2017</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RECOVERY PHASE</div>
+                            <div>1 week</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">MEDICAL COSTS</div>
+                            <div>₹2k</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">CURRENT STATUS</div>
+                            <div>vaccinated neutered</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story 3 -->
+            <div class="rescue-story animate">
+                <h3>Critical Rescue</h3>
+                
+                <!-- Before/During Rescue Images -->
+                <div class="photo-collage">
+                    <img src="https://i.ibb.co/WmgDXyK/In-Collage-20250424-083224857.jpg" alt="Critical rescue photo">
+                    <img src="https://i.ibb.co/HDV1BZFK/In-Collage-20250425-021804396.jpg" alt="Critical rescue photo 2">
+                </div>
+                
+                <!-- Story Content -->
+                <div class="story-box">
+                    <div id="story3" class="story-content">
+                        <p>This was one of the most critical cases we've ever handled.</p>
+                        <p>One of the stray cats we regularly feed showed up one day with a severe wound—there was a deep hole in her leg. We immediately took her home, cleaned the wound with Betadine, and dressed it with bandages.</p>
+                        <p>As days passed, the wound started getting worse instead of healing. So we took her to Parel BSPCA for proper treatment and tests. That's when we got the full picture—she was suffering from jaundice, which we hadn't known, and also from a rare condition where the skin was detaching from the body and hanging loosely, almost like it was separating from the flesh underneath.</p>
+                        <p>Despite the worsening condition, we admitted her and did everything possible. The bills added up to ₹7,000–₹8,000, but we didn't hold back.</p>
+                        <p>Sadly, even with all that effort, she passed away at the hospital due to a heart attack, as the vets informed us.</p>
+                        <p>We'll never forget her—and we carry that experience as a reminder of how precious and fragile these lives are.</p>
+                    </div>
+                    <button onclick="toggleStory('story3')" class="read-more-btn">
+                        Read More <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <!-- Current Status Section -->
+                <h4 class="current-status-title">Current Status</h4>
+                <div class="current-status-images">
+                    <img src="https://i.ibb.co/DDBZLsbv/In-Collage-20250424-083349200.jpg" alt="Critical rescue current photo">
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="rescue-stats">
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RESCUE DATE</div>
+                            <div>July 2022</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RECOVERY PHASE</div>
+                            <div>2 months</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">MEDICAL COSTS</div>
+                            <div>₹8k</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">CURRENT STATUS</div>
+                            <div>Didn't survived</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 4 -->
+            <div class="rescue-story animate">
+                <h3>The Little Visitor</h3>
+                
+                <!-- Before/During Rescue Images -->
+                <div class="photo-collage">
+                    <img src="https://i.ibb.co/gZv97mTv/IMG-20250508-205452.jpg" alt="Little visitor rescue photo">
+                </div>
+                
+                <!-- Story Content -->
+                <div class="story-box">
+                    <div id="story4" class="story-content">
+                        <p>In my area, I regularly feed many stray cats. One day, a small kitten showed up during feeding time, so we gave her food just like the others. She kept coming back every day for about a week, but slowly we noticed she was growing weaker and seemed faint.</p>
+                        <p>Then, one day in 2025, she wandered into our building—and even came into our home on her own. We decided to keep her for a while and feed her properly. But soon, we noticed something alarming: she was urinating blood.</p>
+                        <p>We quickly took some photos and rushed her to Parel BSPCA. The vets there prescribed NERI syrup, Liv-Vitol, and Amoxicillin. Thankfully, within just three days, she was doing much better.</p>
+                        <p>We started looking for a permanent home for her—and by a stroke of luck, a friend of ours who lives on the same floor was looking to adopt a kitten. They loved how playful and beautiful she was, and happily welcomed her into their home.</p>
+                        <p>Now, she's safe, healthy, and living right next door—so I still get to see her from time to time.</p>
+                    </div>
+                    <button onclick="toggleStory('story4')" class="read-more-btn">
+                        Read More <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <!-- Current Status Section -->
+                <h4 class="current-status-title">Current Status</h4>
+                <div class="current-status-images">
+                    <img src="https://i.ibb.co/8DDd2hpr/In-Collage-20250424-085904834.jpg" alt="Little visitor current photo">
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="rescue-stats">
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RESCUE DATE</div>
+                            <div>March 2025</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RECOVERY PHASE</div>
+                            <div>2 weeks</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">MEDICAL COSTS</div>
+                            <div>₹1.2k</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">CURRENT STATUS</div>
+                            <div>Vaccinated Dewormed Adopted</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 5 -->
+            <div class="rescue-story animate">
+                <h3>Bridge Rescue</h3>
+                
+                <!-- Before/During Rescue Images -->
+                <div class="photo-collage">
+                    <img src="https://i.ibb.co/hJRnsM8L/In-Collage-20250424-090455610.jpg" alt="Bridge rescue photo">
+                </div>
+                
+                <!-- Story Content -->
+                <div class="story-box">
+                    <div id="story5" class="story-content">
+                        <p>One day, while we were near Mazgaon Bridge, we heard loud kitten cries coming from somewhere nearby. The sound echoed, and we couldn't figure out where it was coming from at first. After some searching, we finally spotted a tiny kitten peeking through a small opening halfway down the bridge's height. It was such a risky spot, and we were honestly scared to even get close.</p>
+                        <p>We stopped a biker passing by and asked her for help. Thankfully, she managed to get the kitten down safely. I brought the kitten home, gave her food, and checked her condition—luckily, she seemed fine.</p>
+                        <p>We spent the next two days trying to find her mother near the bridge and actually found a cat who looked exactly like her. But sadly, the mother didn't recognize or accept her. We left the kitten there for a day, hoping she might reunite with her mom, but the next day her health had worsened.</p>
+                        <p>That's when we decided to keep her with us until we found someone to adopt her. A week later, one of my friends offered to give her a home. He later even adopted a male cat who looked just like her so she wouldn't feel lonely.</p>
+                        <p>Today, she's 3 years old, and although I'm no longer in touch with that friend, I truly hope she and her companion are living a happy, healthy life.</p>
+                    </div>
+                    <button onclick="toggleStory('story5')" class="read-more-btn">
+                        Read More <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <!-- Current Status Section -->
+                <h4 class="current-status-title">Current Status</h4>
+                <div class="current-status-images">
+                    <img src="https://i.ibb.co/k6ktWccp/In-Collage-20250425-020600735.jpg" alt="Bridge rescue current photo 1">
+                    <img src="https://i.ibb.co/VWmMcpKp/20250508-210237.jpg" alt="Bridge rescue current photo 2">
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="rescue-stats">
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RESCUE DATE</div>
+                            <div>May 2022</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RECOVERY PHASE</div>
+                            <div>2 Days</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">MEDICAL COSTS</div>
+                            <div>₹1k</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">CURRENT STATUS</div>
+                            <div>Vaccinated Dewormed Adopted</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 6 -->
+            <div class="rescue-story animate">
+                <h3>The One Who Came Back</h3>
+                
+                <!-- Before/During Rescue Images -->
+                <div class="photo-collage">
+                    <img src="https://i.ibb.co/vxDq7L1F/In-Collage-20250425-020705118.jpg" alt="Comeback cat rescue photo">
+                </div>
+                
+                <!-- Story Content -->
+                <div class="story-box">
+                    <div id="story6" class="story-content">
+                        <p>Near our building, there used to be a big clothing store with a wide open gate. A female cat had given birth to 3–4 kittens near the corner of the shop, so I placed a box there to give them some shelter. She used to stay inside it with her babies.</p>
+                        <p>One day, I saw that the box had been kicked away—probably by the shopkeepers since it was close to their entrance—and the poor kittens were lying out on the road. We didn't argue with them, but I quietly moved the box to a safer area.</p>
+                        <p>The next day, the mother cat and all the kittens had vanished—except for one, who was found in a different area. We searched everywhere for the mother but never found her. I brought the kitten home to feed him, but since I already had cats, I wasn't allowed to keep another one inside.</p>
+                        <p>So I started taking care of him outside my chawl, feeding him regularly and making sure he was okay. This was sometime in 2018, before COVID hit. One day, he disappeared too. I searched all over the building and nearby areas, but he was just gone.</p>
+                        <p>Then, in 2020—during the peak of the pandemic—I saw him again. He was sleeping near the same clothing shop where his mother and siblings had once lived. I couldn't believe it. I tried to bring him home, but by then he had become very wild and aggressive. I knew he'd become a street cat, and I respected that.</p>
+                        <p>Now it's 2025, and he's still around. I feed him whenever I see him—usually about three times a week, though he disappears often. Who knows where he roams? But I hope, truly, that he lives a long and safe life out there.</p>
+                    </div>
+                    <button onclick="toggleStory('story6')" class="read-more-btn">
+                        Read More <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <!-- Current Status Section -->
+                <h4 class="current-status-title">Current Status</h4>
+                <div class="current-status-images">
+                    <img src="https://i.ibb.co/NRfY5cr/In-Collage-20250508-211912851.jpg" alt="Comeback cat current photo">
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="rescue-stats">
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RESCUE DATE</div>
+                            <div>june 2018</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RECOVERY PHASE</div>
+                            <div>2 Days</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">MEDICAL COSTS</div>
+                            <div>₹500</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">CURRENT STATUS</div>
+                            <div>Still living like a king on the streets</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 7 -->
+            <div class="rescue-story animate">
+                <h3>Love at first bite</h3>
+                
+                <!-- Before/During Rescue Images -->
+                <div class="photo-collage">
+                    <img src="https://i.ibb.co/ymPw6dPv/In-Collage-20250425-021623194.jpg" alt="Love at first bite rescue photo">
+                </div>
+                
+                <!-- Story Content -->
+                <div class="story-box">
+                    <div id="story7" class="story-content">
+                        <p>One day, we spotted a kitten lying near our apartment, looking faint and lifeless. We immediately brought him home to feed and check on him. But the moment he had a packet of cat food and some gravy—boom—he was suddenly full of energy, running around and being irresistibly cute.</p>
+                        <p>It was the first time we ever felt so sure about adopting a kitten without any second thoughts. And just like that, he became part of the family.</p>
+                    </div>
+                    <button onclick="toggleStory('story7')" class="read-more-btn">
+                        Read More <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <!-- Current Status Section -->
+                <h4 class="current-status-title">Current Status</h4>
+                <div class="current-status-images">
+                    <img src="https://i.ibb.co/67c0nZBd/In-Collage-20250425-022055462.jpg" alt="Love at first bite current photo">
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="rescue-stats">
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RESCUE DATE</div>
+                            <div>April 2019</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RECOVERY PHASE</div>
+                            <div>0 Days</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">MEDICAL COSTS</div>
+                            <div>₹1.4k</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">CURRENT STATUS</div>
+                            <div>Adopted by my school friend</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story 8 -->
+            <div class="rescue-story animate">
+                <h3>Happy ending</h3>
+                
+                <!-- Before/During Rescue Images -->
+                <div class="photo-collage">
+                    <img src="https://i.ibb.co/zVQN9fq7/In-Collage-20250508-222035857.jpg" alt="Happy ending rescue photo">
+                </div>
+                
+                <!-- Story Content -->
+                <div class="story-box">
+                    <div id="story8" class="story-content">
+                        <p>We found her struggling to walk near a busy roadside, injured and bleeding with a deep wound near her stomach and leg. Flesh was exposed, and the pain she was in was heartbreaking. Without wasting time, we rushed her to the vet. Surgery was done, stitches were placed, and she slowly began to heal.</p>
+                        <p>After about a month, she became playful again and spent her days with Monu, a fellow rescue. We eventually let her back into the street she came from. She happily greeted the other cats, explored the area, and seemed at peace in her natural world again.</p>
+                        <p>After the COVID-19 lockdown began, she was never seen again—but her courage and recovery will always stay with us.</p>
+                    </div>
+                    <button onclick="toggleStory('story8')" class="read-more-btn">
+                        Read More <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <!-- Current Status Section -->
+                <h4 class="current-status-title">Current Status</h4>
+                <div class="current-status-images">
+                    <img src="https://i.ibb.co/RkXcN55q/In-Collage-20250508-221919557.jpg" alt="Happy ending current photo">
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="rescue-stats">
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RESCUE DATE</div>
+                            <div>April 2019</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RECOVERY PHASE</div>
+                            <div>40 Days</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">MEDICAL COSTS</div>
+                            <div>₹3.5k</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">CURRENT STATUS</div>
+                            <div>No Details Available</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 9 -->
+            <div class="rescue-story animate">
+                <h3>Semi-persian rescue</h3>
+                
+                <!-- Before/During Rescue Images -->
+                <div class="photo-collage">
+                    <img src="https://i.ibb.co/Fb8JQjV1/In-Collage-20250425-021328170.jpg" alt="Semi-persian rescue photo">
+                    <img src="https://i.ibb.co/Nnmsdcxd/In-Collage-20250508-230530509.jpg" alt="Semi-persian rescue photo 2">
+                </div>
+                
+                <!-- Story Content -->
+                <div class="story-box">
+                    <div id="story9" class="story-content">
+                        <p>A friend once told me about a Persian cat that had been abandoned by its owner—possibly because of the mess, litter issues, or simply being too much to handle. The cat was left outside in the building and had started roaming down toward the area where I feed local strays.</p>
+                        <p>Following her around was a tiny orange stray kitten, always by her side like a little shadow. We eventually took them both in and began looking for a solution. Thankfully, the Persian cat's original owner decided to take her back and ended up selling her to someone who actually wanted a Persian and could care for her.</p>
+                        <p>The kitten, though, stayed with us for 3–4 months. Then we sent her to our village in Aurangabad, where she now lives a happy life in a big house, surrounded by other cats and visiting strays. My relatives feed them real homemade food—like chicken and local desi meals—and she's thriving in that peaceful environment.</p>
+                    </div>
+                    <button onclick="toggleStory('story9')" class="read-more-btn">
+                        Read More <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <!-- Current Status Section -->
+                <h4 class="current-status-title">Current Status</h4>
+                <div class="current-status-images">
+                    <img src="https://i.ibb.co/CpSVKVYw/IMG-20250508-230435.jpg" alt="Semi-persian current photo">
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="rescue-stats">
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RESCUE DATE</div>
+                            <div>April 2019</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RECOVERY PHASE</div>
+                            <div>2 Days</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">MEDICAL COSTS</div>
+                            <div>₹0</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">CURRENT STATUS</div>
+                            <div>Lives in an open lawn with daily feeding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story 10 -->
+            <div class="rescue-story animate">
+                <h3>A Box of Hope</h3>
+                
+                <!-- Before/During Rescue Images -->
+                <div class="photo-collage">
+                    <img src="https://i.ibb.co/8nMxpHLH/In-Collage-20250508-231547768.jpg" alt="Box of hope rescue photo">
+                </div>
+                
+                <!-- Story Content -->
+                <div class="story-box">
+                    <div id="story10" class="story-content">
+                        <p>Everyone in my locality knows that I feed and care for stray cats. One day in 2018, someone abandoned two tiny kittens in a box near our gate. They cried non-stop for hours until we brought them inside, fed them, and gave them warmth.</p>
+                        <p>By the next day, both kittens fell sick with severe diarrhea and vomiting. We treated them with Metrogyl and Amimeo syrups, and thankfully, within five days they recovered. They turned out to be full of mischief and play, bringing so much joy to our home.</p>
+                        <p>We cared for them until we found them a loving home. Fortunately, a family in our village (Aurangabad) was looking to adopt, so we sent them there by train. I haven't received any updates since(2018), but I hope they are still living a happy life.</p>
+                    </div>
+                    <button onclick="toggleStory('story10')" class="read-more-btn">
+                        Read More <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                
+                <!-- Current Status Section -->
+                <h4 class="current-status-title">Current Status</h4>
+                <div class="current-status-images">
+                    <img src="https://i.ibb.co/HDMbmwpR/In-Collage-20250508-231824842.jpg" alt="Box of hope current photo">
+                </div>
+                
+                <!-- Stats Section -->
+                <div class="rescue-stats">
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RESCUE DATE</div>
+                            <div>Jan 2018</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">RECOVERY PHASE</div>
+                            <div>5 Days</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">MEDICAL COSTS</div>
+                            <div>₹500</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-box">
+                            <div class="stat-title">CURRENT STATUS</div>
+                            <div>Still together in village</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title animate">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info animate">
+                <h3>Get In Touch</h3>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        +91 9867373167
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <a href="mailto:felinefriendsbyculla@gmail.com">felinefriendsbyculla@gmail.com</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="contact-text">
+                        <a href="https://www.instagram.com/feline_friends_byculla?igsh=eHhrN3ZqNHN0MGFz" target="_blank">@felinefriendsbyculla</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-info animate delay-1">
+                <h3>Location</h3>
+                <p> Mumbai </p>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        Byculla, Mumbai 
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        Feeding time: 10PM-12AM
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <img src="https://i.ibb.co/6RmN6xHF/IMG-20250406-WA0033.jpg" alt="Feline Friends Byculla Logo" class="footer-logo">
+        <div class="social-links">
+            <a href="https://instagram.com/felinefriendsbyculla" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:felinefriendsbyculla@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="tel:+919867373167"><i class="fas fa-phone-alt"></i></a>
+        </div>
+        <p class="copyright">© 2023 Feline Friends Byculla. All rights reserved.</p>
+    </footer>
+
+    <!-- Thank You Modal -->
+    <div class="modal" id="thankYouModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title">Thank You for Your Generosity!</h2>
+            
+            <div class="happy-cats">
+                <div class="happy-cat"></div>
+            </div>
+            
+            <div class="modal-message" id="thankYouMessage">
+                <!-- Filled by JavaScript -->
+            </div>
+            <div class="impact-statement" id="impactStatement">
+                <!-- Filled by JavaScript -->
+            </div>
+            <button class="btn btn-primary" style="margin-top: 20px; width: 100%;" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Payment Modal (Dynamically inserted) -->
+
+<script>
+    // Mobile Menu Toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mainNav = document.getElementById('main-nav');
+    
+    menuBtn.addEventListener('click', () => {
+        mainNav.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('#main-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            mainNav.classList.remove('active');
+        });
+    });
+    
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('main-header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    // ================== IMPROVED DONATION SYSTEM ==================
+    let cart = [];
+    let lastClickTime = 0;
+    const clickDelay = 300; // 300ms click cooldown
+    let currentDonationAmount = 0;
+
+    // Click-protected cart functions
+    function addToCart(amount, item, event) {
+        const now = Date.now();
+        if (now - lastClickTime < clickDelay) return;
+        lastClickTime = now;
+        
+        const existingItem = cart.find(i => i.item === item);
+        if (existingItem) {
+            existingItem.quantity += 1;
+            existingItem.total = existingItem.quantity * amount;
+        } else {
+            cart.push({ item, amount, quantity: 1, total: amount });
+        }
+        updateCartDisplay();
+        animateSelection(event.target.closest('.donation-card'));
+    }
+
+    function addMultipleToCart(amount, item, quantity = 2, event) {
+        const now = Date.now();
+        if (now - lastClickTime < clickDelay) return;
+        lastClickTime = now;
+        
+        const existingItem = cart.find(i => i.item === item);
+        if (existingItem) {
+            existingItem.quantity += quantity;
+            existingItem.total = existingItem.quantity * amount;
+        } else {
+            cart.push({ item, amount, quantity, total: amount * quantity });
+        }
+        updateCartDisplay();
+        animateSelection(event.target.closest('.donation-card'));
+    }
+
+    function animateSelection(element) {
+        element.classList.add('selected');
+        setTimeout(() => element.classList.remove('selected'), 300);
+    }
+
+    function resetCart() {
+        cart = [];
+        document.getElementById('customAmount').value = '';
+        updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+        const summaryItems = document.getElementById('summaryItems');
+        const totalAmount = document.getElementById('totalAmount');
+        const customAmount = parseInt(document.getElementById('customAmount').value) || 0;
+        
+        if (cart.length === 0 && customAmount === 0) {
+            summaryItems.innerHTML = '<p>No items selected yet</p>';
+            totalAmount.textContent = '₹0';
+            return;
+        }
+        
+        let itemsHTML = cart.map(item => `
+            <div class="summary-item">
+                <span>${item.item} × ${item.quantity}</span>
+                <span>₹${item.total}</span>
+            </div>
+        `).join('');
+        
+        if (customAmount > 0) {
+            itemsHTML += `
+                <div class="summary-item">
+                    <span>Custom Amount</span>
+                    <span>₹${customAmount}</span>
+                </div>
+            `;
+        }
+        
+        summaryItems.innerHTML = itemsHTML;
+        totalAmount.textContent = `₹${cart.reduce((sum, item) => sum + item.total, 0) + customAmount}`;
+    }
+
+    function processDonation() {
+        const customAmount = parseInt(document.getElementById('customAmount').value) || 0;
+        const cartTotal = cart.reduce((sum, item) => sum + item.total, 0);
+        currentDonationAmount = cartTotal + customAmount;
+
+        if (currentDonationAmount <= 0) {
+            alert('Please select donation items or enter an amount');
+            return;
+        }
+
+        // Create transaction note
+        const itemsList = cart.map(item => `${item.item} (×${item.quantity})`).join(', ');
+        const transactionNote = `Donation for ${itemsList || 'cat food'}`;
+        
+        // Show payment modal
+        showQRPaymentModal(currentDonationAmount, transactionNote);
+    }
+
+    function showQRPaymentModal(amount, note) {
+        // Create modal HTML
+        const modalHTML = `
+            <div class="modal" id="paymentModal" style="display: block;">
+                <div class="modal-content">
+                    <span class="close-modal" onclick="closePaymentModal()">&times;</span>
+                    <h2 class="modal-title">Donate ₹${amount}</h2>
+                    
+                    <div style="margin: 20px 0; text-align: center;">
+                        <p style="margin-bottom: 15px;">Scan this QR code with any UPI app to complete your donation</p>
+                        
+                        <a href="upi://pay?pa=felinefriendsmaaz@fam&pn=FelineFriendsByculla&am=${amount}&tn=${encodeURIComponent(note)}" 
+                           style="display: inline-block;">
+                            <img src="https://i.ibb.co/vCwbwgF1/IMG-20250508-011716.jpg" 
+                                 alt="UPI QR Code" 
+                                 class="qr-code" 
+                                 style="max-width: 250px; border: 1px solid #eee;">
+                        </a>
+                        
+                        <div style="margin: 20px 0;">
+                            <p>Or send directly to UPI ID:</p>
+                            <div style="background: #f5f5f5; padding: 10px; border-radius: 5px; display: inline-block;">
+                                <strong>felinefriendsmaaz@fam</strong>
+                            </div>
+                            <button onclick="copyUPIId()" class="btn btn-outline" style="margin-top: 10px;">
+                                <i class="fas fa-copy"></i> Copy UPI ID
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 10px;">After Payment:</h3>
+                        <p style="margin-bottom: 15px;">Please confirm your payment below so we can thank you and update our records</p>
+                        
+                        <button onclick="verifyPayment(${amount})" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-check-circle"></i> I've Completed the Payment
+                        </button>
+                        
+                        <p style="font-size: 0.9rem; margin-top: 15px; color: #666;">
+                            Note: This is a manual confirmation. We trust our donors to be honest.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add modal to body
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+
+    function closePaymentModal() {
+        const modal = document.getElementById('paymentModal');
+        if (modal) {
+            modal.remove();
+        }
+    }
+
+    function copyUPIId() {
+        navigator.clipboard.writeText('felinefriendsmaaz@fam');
+        alert('UPI ID copied to clipboard! You can paste it in any UPI app to pay.');
+    }
+
+    function verifyPayment(amount) {
+        // In a real implementation, you would verify with a backend
+        // For now, we'll trust the user's confirmation
+        showThankYouMessage(amount);
+        closePaymentModal();
+        resetCart();
+        
+        // Update leaderboard with this donation
+        const youIndex = donors.findIndex(d => d.name === "You");
+        if (youIndex !== -1) {
+            donors[youIndex].amount += amount;
+            updateLeaderboard();
+        }
+    }
+
+    function showThankYouMessage(amount) {
+        const itemsList = cart.map(item => `${item.item} (×${item.quantity})`).join(', ');
+        const impactMessage = getImpactMessage(amount);
+        
+        document.getElementById('thankYouMessage').innerHTML = `
+            <p>Thank you for your donation of <strong>₹${amount}</strong>${itemsList ? ` for ${itemsList}` : ''}!</p>
+            <p>Your support makes a real difference in these cats' lives.</p>
+        `;
+        
+        document.getElementById('impactStatement').innerHTML = `
+            <h4>Your Impact</h4>
+            <p>${impactMessage}</p>
+        `;
+        
+        document.getElementById('thankYouModal').style.display = 'block';
+    }
+
+    function getImpactMessage(amount) {
+        if (amount >= 300) return `With ₹${amount}, you've provided food for all 15 cats for 5+ days!`;
+        if (amount >= 199) return `With ₹${amount}, you've provided dry food for all cats for 3 days.`;
+        if (amount >= 100) return `With ₹${amount}, you've provided special meals for 5 cats.`;
+        return `With ₹${amount}, you've provided meals for ${Math.floor(amount/30)} cats.`;
+    }
+
+    function closeModal() {
+        document.getElementById('thankYouModal').style.display = 'none';
+    }
+
+    // Toggle story content
+    function toggleStory(storyId) {
+        const storyContent = document.getElementById(storyId);
+        const button = document.querySelector(`[onclick="toggleStory('${storyId}')"]`);
+        
+        if (storyContent.style.maxHeight === '200px' || !storyContent.style.maxHeight) {
+            storyContent.style.maxHeight = `${storyContent.scrollHeight}px`;
+            button.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
+        } else {
+            storyContent.style.maxHeight = '200px';
+            button.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
+        }
+    }
+
+    // Progress and Leaderboard
+    const donors = [
+        { name: "Anam", amount: 100 },
+        { name: "Sauban", amount: 100 },
+        { name: "Abubakar", amount: 0 },
+        { name: "You", amount: 0 }
+    ];
+
+    function updateLeaderboard() {
+        const leaderboardElement = document.getElementById('leaderboard');
+        if (leaderboardElement) {
+            leaderboardElement.innerHTML = donors
+                .sort((a, b) => b.amount - a.amount)
+                .map(donor => `
+                    <div class="donor-item">
+                        <span class="name">${donor.name}</span>
+                        <span class="amount">₹${donor.amount} 🐾</span>
+                    </div>
+                `).join('');
+        }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.scrollY > 50) {
+            document.getElementById('main-header').classList.add('scrolled');
+        }
+        document.querySelector('.about-content').classList.add('visible');
+        updateLeaderboard();
+        
+        // Set up double click for donation cards
+        document.querySelectorAll('.donation-card').forEach(card => {
+            card.addEventListener('dblclick', (e) => {
+                const amount = parseInt(card.querySelector('.price').textContent.replace('₹', ''));
+                const item = card.querySelector('h3').textContent;
+                addMultipleToCart(amount, item, 2, e);
+            });
+        });
+        
+        // Custom amount input validation
+        document.getElementById('customAmount').addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            updateCartDisplay();
+        });
+        
+        // Initialize all stories as collapsed
+        document.querySelectorAll('.story-content').forEach(content => {
+            content.style.maxHeight = '200px';
+        });
+    });
+</script>
+</body>
+</html>
